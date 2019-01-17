@@ -12,3 +12,8 @@ AsyncLogging负责(定时到或被填满时)将缓冲区中的数据写入LogFil
 LogStream主要用来格式化输出，重载了<<运算符，同时也有自己的一块缓冲区，这里缓冲区的存在是为了缓存一行，把多个<<的结果连成一块。
 Logging是对外接口，Logging类内涵一个LogStream对象，主要是为了每次打log的时候在log之前和之后加上固定的格式化的信息，比如打log的行、
 文件名等信息。
+
+用法：LOG << "info" <<  ... << "info"  一行的大小需要小于4KB
+其中使用宏定义：#define LOG Logger(__FILE__, __LINE__).stream();
+实际调用过程：
+Logger -> Impl -> LogStream -> operator<< FixedBuffer -> output -> flush

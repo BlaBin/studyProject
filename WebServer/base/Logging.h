@@ -41,4 +41,4 @@ private:
 };
 
 //对外接口 LOG
-#define LOG Logger(__FILE, __LINE__).stream()
+#define LOG Logger(__FILE__, __LINE__).stream()
