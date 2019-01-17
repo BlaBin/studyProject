@@ -42,3 +42,4 @@ private:
 
 //对外接口 LOG
 #define LOG Logger(__FILE__, __LINE__).stream()
+//Logger -> Impl -> LogStream -> operator<< FixBuffer(4KB) -> output -> flush
