@@ -1,2 +1,3 @@
 # WebServer
-A C++ High Performance Web Server
+High-performance web server written in C++
+
