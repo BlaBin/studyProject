@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月17日16:51:14
+//2018年12月09日16:51:14
 #pragma once
 #include <string>
 #include <unordered_map>
@@ -127,7 +127,7 @@ private:
     std::weak_ptr<TimerNode> timer_;
 
     void handleRead();
-    void headleWrite();
+    void handleWrite();
     void handleConn();
     void handleError(int fd, int err_num, std::string short_msg);
     URIState parseURI();

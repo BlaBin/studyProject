@@ -1,10 +1,12 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
+//2018年11月25日23:48:26
 #pragma once
+#include <stdint.h>
 
 namespace CurrentThread
 {
-    extern __thread int t_catchTid;
+    extern __thread int t_cacheTid;
     extern __thread char t_tidString[32];
     extern __thread int t_tidStringLength;
     extern __thread const char* t_threadName;
@@ -12,11 +14,11 @@ namespace CurrentThread
     void cacheTid();
     inline int tid()
     {
-        if(__builtin_expect(t_catchTid == 0, 0))
+        if(__builtin_expect(t_cacheTid == 0, 0))
         {
             cacheTid();
         }
-        return t_catchTid;
+        return t_cacheTid;
     }
     
     inline const char* tidString()   //for logging

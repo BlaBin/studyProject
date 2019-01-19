@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月14日23:18:19
+//2018年11月27日19:54:03
 #include "Thread.h"
 #include "CurrentThread.h"
 #include <unistd.h>
@@ -112,7 +112,7 @@ void Thread::start()
     assert(!started_);
     started_ = true;
     ThreadData* data = new ThreadData(func_, name_, &tid_, &latch_);
-    if(pthread_create(&phtreadId_, NULL, &startThread, data))
+    if(pthread_create(&pthreadId_, NULL, &startThread, data))
     {
         started_ = false;
         delete data;
@@ -120,14 +120,14 @@ void Thread::start()
     else
     {
         latch_.wait();   //确保得到tid_的数值之后在返回start()函数
-        assert(tid > 0);
+        assert(tid_ > 0);
     }
 }
 
 int Thread::join()
 {
     assert(started_);
-    aseert(!joined_);
+    assert(!joined_);
     joined_ = true;
     return pthread_join(pthreadId_, NULL);
 }

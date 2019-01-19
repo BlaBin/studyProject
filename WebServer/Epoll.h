@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月17日22:58:29
+//2018年12月13日22:58:29
 #pragma once
 #include "Channel.h"
 #include "HttpData.h"

@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月14日23:01:26
+//2018年11月27日19:35:42
 //封装线程类
 #pragma once
 #include "CountDownLatch.h"
@@ -17,9 +17,9 @@ public:
     ~Thread();
     void start();
     int join();
-    bool started() const {return started_};
-    pid_t tid() const {return tid_};
-    const std::string& name() const {return name_};
+    bool started() const {return started_; }
+    pid_t tid() const {return tid_; }
+    const std::string& name() const {return name_; }
 
 private:
     void setDefaultName();

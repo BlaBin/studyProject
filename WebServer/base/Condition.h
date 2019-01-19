@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月14日22:20:19
+//2018年11月23日21:03:12
 //封装条件变量
 #pragma once
 #include "noncopyable.h"

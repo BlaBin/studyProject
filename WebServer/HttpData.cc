@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月17日17:28:45
+//2018年12月09日17:28:45
 #include "Util.h"
 #include "Channel.h"
 #include "EventLoop.h"
@@ -15,9 +15,9 @@ using namespace std;
 pthread_once_t MimeType::once_control = PTHREAD_ONCE_INIT;
 std::unordered_map<std::string, std::string> MimeType::mime;
 
-const __uint32_t DEFLAUT_EVENT = EPOLLIN | EPOLLET | EPOLLONESHOT;
+const __uint32_t DEFAULT_EVENT = EPOLLIN | EPOLLET | EPOLLONESHOT;
 const int DEFAULT_EXPIRED_TIME = 2000;  //ms
-const int DEAFULT_KEEP_ALIVE_TIME = 5 * 60 * 1000; //ms
+const int DEFAULT_KEEP_ALIVE_TIME = 5 * 60 * 1000; //ms
 
 char favicon[555] = {
   '\x89', 'P', 'N', 'G', '\xD', '\xA', '\x1A', '\xA',
@@ -120,7 +120,7 @@ std::string MimeType::getMime(const std::string& suffix)
 }
 
 HttpData::HttpData(EventLoop* loop, int connfd)
-  : loop_(loop)
+  : loop_(loop),
     channel_(new Channel(loop, connfd)),
     fd_(connfd),
     error_(false),
@@ -130,7 +130,7 @@ HttpData::HttpData(EventLoop* loop, int connfd)
     nowReadPos_(0),
     state_(STATE_PARSE_URI),
     hState_(H_START),
-    keepAlive(false)
+    keepAlive_(false)
 {
     channel_->setReadHandler(bind(&HttpData::handleRead, this));
     channel_->setWriteHandler(bind(&HttpData::handleWrite, this));
@@ -149,7 +149,7 @@ void HttpData::reset()
     //keepAlive_ = false;
     if(timer_.lock())
     {
-        shared_ptr<TimerNode> my_timer(timer.lock());
+        shared_ptr<TimerNode> my_timer(timer_.lock());
         my_timer->clearReq();
         timer_.reset();
     }
@@ -167,11 +167,11 @@ void HttpData::seperateTimer()
 
 void HttpData::handleRead()
 {
-    __uint32_t& events_ = channel_->getEvent();
+    __uint32_t& events_ = channel_->getEvents();
     do
     {
         bool zero = false;
-        int read_num = readn(fd, inBuffer_, zero);
+        int read_num = readn(fd_, inBuffer_, zero);
         LOG << "Request: " << inBuffer_;
         if(connectionState_ == H_DISCONNECTING)
         {
@@ -409,8 +409,8 @@ URIState HttpData::parseURI()
     pos = request_line.find("/", pos);
     if (pos < 0)
     {
-        fileName_ = "index.html";
-        HTTPVersion_ = HTTP_11;
+        filename_ = "index.html";
+        version_ = HTTP_11;
         return PARSE_URI_SUCCESS;
     }
     else
@@ -422,16 +422,16 @@ URIState HttpData::parseURI()
         {
             if (_pos - pos > 1)
             {
-                fileName_ = request_line.substr(pos + 1, _pos - pos - 1);
-                size_t __pos = fileName_.find('?');
+                filename_ = request_line.substr(pos + 1, _pos - pos - 1);
+                size_t __pos = filename_.find('?');
                 if (__pos >= 0)
                 {
-                    fileName_ = fileName_.substr(0, __pos);
+                    filename_ = filename_.substr(0, __pos);
                 }
             }
                 
             else
-                fileName_ = "index.html";
+                filename_ = "index.html";
         }
         pos = _pos;
     }
@@ -448,9 +448,9 @@ URIState HttpData::parseURI()
         {
             string ver = request_line.substr(pos + 1, 3);
             if (ver == "1.0")
-                HTTPVersion_ = HTTP_10;
+                version_ = HTTP_10;
             else if (ver == "1.1")
-                HTTPVersion_ = HTTP_11;
+                version_ = HTTP_11;
             else
                 return PARSE_URI_ERROR;
         }
@@ -610,21 +610,21 @@ AnalysisState HttpData::analysisRequest()
             keepAlive_ = true;
             header += string("Connection: Keep-Alive\r\n") + "Keep-Alive: timeout=" + to_string(DEFAULT_KEEP_ALIVE_TIME) + "\r\n";
         }
-        int dot_pos = fileName_.find('.');
+        int dot_pos = filename_.find('.');
         string filetype;
         if (dot_pos < 0) 
             filetype = MimeType::getMime("default");
         else
-            filetype = MimeType::getMime(fileName_.substr(dot_pos));
+            filetype = MimeType::getMime(filename_.substr(dot_pos));
         
 
         // echo test
-        if (fileName_ == "hello")
+        if (filename_ == "hello")
         {
             outBuffer_ = "HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
             return ANALYSIS_SUCCESS;
         }
-        if (fileName_ == "favicon.ico")
+        if (filename_ == "favicon.ico")
         {
             header += "Content-Type: image/png\r\n";
             header += "Content-Length: " + to_string(sizeof favicon) + "\r\n";
@@ -637,7 +637,7 @@ AnalysisState HttpData::analysisRequest()
         }
 
         struct stat sbuf;
-        if (stat(fileName_.c_str(), &sbuf) < 0)
+        if (stat(filename_.c_str(), &sbuf) < 0)
         {
             header.clear();
             handleError(fd_, 404, "Not Found!");
@@ -653,7 +653,7 @@ AnalysisState HttpData::analysisRequest()
         if (method_ == METHOD_HEAD)
             return ANALYSIS_SUCCESS;
 
-        int src_fd = open(fileName_.c_str(), O_RDONLY, 0);
+        int src_fd = open(filename_.c_str(), O_RDONLY, 0);
         if (src_fd < 0)
         {
           outBuffer_.clear();
@@ -712,6 +712,5 @@ void HttpData::newEvent()
 {
     channel_->setEvents(DEFAULT_EVENT);
     loop_->addToPoller(channel_, DEFAULT_EXPIRED_TIME);
-}
 }
 

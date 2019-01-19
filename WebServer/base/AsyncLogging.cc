@@ -1,13 +1,13 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月15日17:04:21
+//2018年12月04日10:06:34
 #include "AsyncLogging.h"
 #include "LogFile.h"
 #include <stdio.h>
 #include <assert.h>
 #include <functional>     //for std::function std::bind
 
-AsyncLogging::AsyncLogging(std::string& logFileName, int flushInterval)
+AsyncLogging::AsyncLogging(std::string logFileName, int flushInterval)
   : flushInterval_(flushInterval),
     running_(false),
     basename_(logFileName),
@@ -46,7 +46,7 @@ void AsyncLogging::append(const char* logline, int len)
             //这种情况极少发生，前端写入线程太快，把2块都写完了
             currentBuffer_.reset(new Buffer);
         }
-        currentBuffer_.append(logline, len);
+        currentBuffer_->append(logline, len);
         //保证了不是一有数据就开始写入文件，效率较高
         cond_.notify();
     }
@@ -67,7 +67,7 @@ void AsyncLogging::threadFunc()
     while(running_)
     {
         assert(newBuffer1 && newBuffer1->length() == 0);
-        assert(newBuffer2 && newBuffer2-》length() == 0);
+        assert(newBuffer2 && newBuffer2->length() == 0);
         assert(buffersToWrite.empty());
 
         {
@@ -98,7 +98,7 @@ void AsyncLogging::threadFunc()
             buffersToWrite.erase(buffersToWrite.begin()+2, buffersToWrite.end());
         }
 
-        for(size_t i = 0; i < buffersToWrite.size(), i++)
+        for(size_t i = 0; i < buffersToWrite.size(); i++)
         {
             output.append(buffersToWrite[i]->data(), buffersToWrite[i]->length());
         }

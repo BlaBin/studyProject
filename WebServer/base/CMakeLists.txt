@@ -8,7 +8,11 @@ set(base_SRCS
     Thread.cc
    )
 
-add_library(server_base STATIC ${base_SRC})
+add_library(server_base STATIC ${base_SRCS})
 target_link_libraries(server_base pthread rt)
 
 add_subdirectory(tests)
+
+#Author: xcw
+#Email:  xcw_coder@qq.com
+#2018年12月04日23:59:12

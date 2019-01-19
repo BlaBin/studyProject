@@ -1,6 +1,6 @@
 //Author: xcw
 //Email: xcw_coder@qq.com
-//2019年01月15日16:21:54
+//2018年12月01日22:34:52
 #include "LogStream.h"
 #include <assert.h>
 #include <string.h>
@@ -112,7 +112,7 @@ LogStream& LogStream::operator<<(long double v)
 {
     if(buffer_.avail() >= kMaxNumericSize)
     {
-        int len = snprintf(buffer_.current(), kMaxNumericSize, "%.12g", v);
+        int len = snprintf(buffer_.current(), kMaxNumericSize, "%.12Lg", v);
         buffer_.add(len);
     }
     return *this;

@@ -1,4 +1,3 @@
-2019年01月16日21:13:28
 Log的设计仿照了muduo库的设计,但我写的没那么复杂
 https://github.com/chenshuo/muduo
 

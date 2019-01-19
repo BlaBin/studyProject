@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月15日16:48:05
+//2018年12月04日09:35:55
 #pragma once
 #include "CountDownLatch.h"
 #include "MutexLock.h"
@@ -42,7 +42,7 @@ private:
     //后端消费者线程调用(将数据写到日志文件中区)
     void threadFunc();   //线程函数里维护着一个LogFile文件
     typedef FixedBuffer<kLargerBuffer> Buffer;
-    typedef std::vector<std::unique<Buffer>> BufferVector;
+    typedef std::vector<std::unique_ptr<Buffer>> BufferVector;
     typedef BufferVector::value_type BufferPtr;
     
     //超时时间内当前缓冲区没有写满，仍然将缓冲区的数据写到文件

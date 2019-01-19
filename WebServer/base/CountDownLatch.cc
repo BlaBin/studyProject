@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月14日22:39:51
+//2018年11月25日23:21:54
 #include "CountDownLatch.h"
 
 CountDownLatch::CountDownLatch(int count) : mutex_(), condition_(mutex_), count_(count)

@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月17日15:13:03
+//2018年12月09日15:18:03
 #include "Util.h"
 #include <unistd.h>
 #include <stdio.h>
@@ -166,18 +166,24 @@ void handle_for_sigpipe()
     sigaction(SIGPIPE, &act, 0);
 }
 
-void setSocketNonBlocking(int fd)
+int setSocketNonBlocking(int fd)
 {
     int flags = fcntl(fd, F_GETFL, 0);
+    if(flags == -1)
+        return -1;
     flags |= O_NONBLOCK;
     int ret = ::fcntl(fd, F_SETFL, flags); 
-    //FIXME CHECK
+    if(ret == -1)
+        return -1;
 
     flags = fcntl(fd, F_GETFD, 0);
+    if(flags == -1)
+        return -1;
     flags |= FD_CLOEXEC;
     ret = ::fcntl(fd, F_SETFD, flags);
-    //FIXME CHECK
-    (void) ret;
+    if(ret == -1)
+        return -1;
+    return ret;
 }
 
 //禁止nagle算法

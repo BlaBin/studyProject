@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com 
-//2019年01月15日00:32:43
+//2018年11月29日00:21:15
 #include "FileUtil.h"
 #include <assert.h>
 #include <errno.h>
@@ -13,7 +13,7 @@ using namespace std;
 AppendFile::AppendFile(string filename)     
 : fp_(fopen(filename.c_str(), "ae"))  //  'e' for close_on_exec
 {
-    assert(fp);
+    assert(fp_);
     //设定文件指针的缓冲区为buffer_，如果不指定，文件指针缓冲区默认
     //文件缓冲区超过64kb会自动flush，不需要手动flush
     ::setbuffer(fp_, buffer_, sizeof buffer_);

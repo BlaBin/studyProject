@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月17日23:26:09
+//2018年12月13日23:26:09
 #include "Epoll.h"
 #include "Util.h"
 #include "Channel.h"
@@ -49,6 +49,25 @@ void Epoll::epoll_add(SP_Channel request, int timeout)
     {
         perror("epoll add error");
         fd2chan_[fd].reset();
+    }
+}
+
+// 修改描述符状态
+void Epoll::epoll_mod(SP_Channel request, int timeout)
+{
+    if (timeout > 0)
+        add_timer(request, timeout);
+    int fd = request->getFd();
+    if (!request->EqualAndUpdateLastEvents())
+    {
+        struct epoll_event event;
+        event.data.fd = fd;
+        event.events = request->getEvents();
+        if(epoll_ctl(epollFd_, EPOLL_CTL_MOD, fd, &event) < 0)
+        {
+            perror("epoll_mod error");
+            fd2chan_[fd].reset();
+        }
     }
 }
 

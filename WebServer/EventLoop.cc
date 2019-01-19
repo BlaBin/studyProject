@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月18日01:17:36
+//2018年12月19日01:17:36
 #include "EventLoop.h"
 #include "base/Logging.h"
 #include "Util.h"
@@ -36,7 +36,7 @@ EventLoop::EventLoop():
 {
     if(t_loopInThisThread)
     {
-        LOG << "Another EventLoop " << t_loopInThisThread << " exists in this thread " << threadId_;
+        LOG << "Another EventLoop " /*t_loopInThisThread*/ << " exists in this thread " << threadId_;
     }
     else
     {
@@ -136,7 +136,7 @@ void EventLoop::doPendingFunctors()
         functors.swap(pendingFunctors_);
     }
 
-    for(size_t i = 0; i < functors.size(), i++)
+    for(size_t i = 0; i < functors.size(); i++)
         functors[i]();
     callingPendingFunctors_ = false;
 }

@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月15日01:17:08
+//2018年12月01日21:08:33
 //进一步封装FileUtil类
 #pragma once
 #include "FileUtil.h"
@@ -17,7 +17,7 @@ public:
 
     void append(const char* logline, int len);
     void flush();
-    bool roolFile();
+    //bool roolFile();
 
 private:
     void append_unlocked(const char* logline, int len);

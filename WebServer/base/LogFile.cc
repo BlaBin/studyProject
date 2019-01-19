@@ -1,6 +1,6 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
-//2019年01月15日01:26:17
+//2018年12月01日21:31:43
 #include "LogFile.h"
 #include "FileUtil.h"
 #include <assert.h>
@@ -34,7 +34,7 @@ void LogFile::append_unlocked(const char* logline, int len)
     if(count_ >= flushEveryN_)
     {
         count_ = 0;
-        file->flush();
+        file_->flush();
     }
 }
 
