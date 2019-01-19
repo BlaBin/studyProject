@@ -1,4 +1,7 @@
 # High-performance web server written in C++
+[![Build Status](https://travis-ci.org/xcw-coder/WebServer.svg?branch=master)](https://travis-ci.org/xcw-coder/WebServer)
+![](https://img.shields.io/cran/l/devtools.svg)
+
 ## 项目简介
 本项目为C++11编写的Web服务器，解析了get、head请求，可处理静态资源，支持HTTP长连接，支持管线化请求，并实现了异步日志，记录服务器运行状态。
 
