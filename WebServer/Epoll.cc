@@ -95,7 +95,10 @@ std::vector<SP_Channel> Epoll::poll()
         int event_count = epoll_wait(epollFd_, &*events_.begin(), events_.size(), EPOLLWAIT_TIME);
         if(event_count < 0)
             perror("epoll wait error");
+        //获取活跃事件的通道
         std::vector<SP_Channel> req_data = getEventRequest(event_count);
+        if (req_data.size() > 0)
+            return req_data;
     }
 }
 
