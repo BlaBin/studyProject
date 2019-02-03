@@ -19,7 +19,8 @@ Server::Server(EventLoop* loop, int threadNum, int port):
     listenFd_(socket_bind_listen(port_))
 {
     acceptChannel_->setFd(listenFd_);
-    handle_for_sigpipe();
+    //向已经收到RST的socket写数据，默认是终止进程，所以必须忽略这个信号
+    handle_for_sigpipe();   
     if(setSocketNonBlocking(listenFd_) < 0)
     {
         perror("set socket non block failed");
