@@ -7,9 +7,9 @@
 ## 项目简介
 本项目为C++11编写的Web服务器，解析了get、head请求，可处理静态资源，支持HTTP长连接，支持管线化请求，并实现了异步日志，记录服务器运行状态。
 
-|Part I|Part II|Part III|Part IV|Part V|
-|---|---|----|---|---|
-|[并发模型](https://github.com/xcw-coder/WebServer/blob/master/%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B.md)|[连接维护](https://github.com/xcw-coder/WebServer/blob/master/%E8%BF%9E%E6%8E%A5%E7%BB%B4%E6%8A%A4.md)|[测试及改进](https://github.com/xcw-coder/WebServer/blob/master/%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%94%B9%E8%BF%9B.md)|[项目目的](https://github.com/xcw-coder/WebServer/blob/master/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E7%9A%84.md)|[面试问题](https://github.com/xcw-coder/WebServer/blob/master/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98.md)|
+|Part I|Part II|Part III|Part IV|Part V|Part VI|Part VII|
+|---|---|----|---|---|---|---|
+|[并发模型](https://github.com/xcw-coder/WebServer/blob/master/%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B.md)|[连接维护](https://github.com/xcw-coder/WebServer/blob/master/%E8%BF%9E%E6%8E%A5%E7%BB%B4%E6%8A%A4.md)|[测试及改进](https://github.com/xcw-coder/WebServer/blob/master/%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%94%B9%E8%BF%9B.md)|[项目目的](https://github.com/xcw-coder/WebServer/blob/master/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E7%9A%84.md)|[遇到的困难](https://github.com/xcw-coder/WebServer/blob/master/%E9%81%87%E5%88%B0%E7%9A%84%E5%9B%B0%E9%9A%BE.md)| [版本历史](https://github.com/xcw-coder/WebServer/blob/master/%E7%89%88%E6%9C%AC%E5%8E%86%E5%8F%B2.md) | [面试问题](https://github.com/xcw-coder/WebServer/blob/master/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98.md) |
 
 ## 开发环境  
 * OS: Ubuntu 16.04
