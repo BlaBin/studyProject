@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 
     //解析args
     int opt;
-    const char* str = "t:l:p";
+    const char* str = "t:l:p:";
     while((opt = ::getopt(argc, argv, str)) != -1)
     {
         switch(opt)
