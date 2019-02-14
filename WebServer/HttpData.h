@@ -25,7 +25,7 @@ enum ProcessState
 
 enum URIState
 {
-    PARSE_URI_AGAIN = 1,
+    PARSE_URI_AGAIN = 1,    //没有读取到完整请求行
     PARSE_URI_ERROR,
     PARSE_URI_SUCCESS
 };
@@ -115,8 +115,8 @@ private:
     bool error_;
     ConnectionState connectionState_;
 
-    HttpMethod method_;
-    HttpVersion version_;
+    HttpMethod method_;       //请求方法
+    HttpVersion version_;     //HTTP版本
     std::string filename_;
     std::string path_;
     int nowReadPos_;

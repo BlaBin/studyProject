@@ -1,6 +1,7 @@
 //Author: xcw
 //Email:  xcw_coder@qq.com
 //2018年12月09日17:28:45
+#include "HttpData.h"
 #include "Util.h"
 #include "Channel.h"
 #include "EventLoop.h"
@@ -212,7 +213,7 @@ void HttpData::handleRead()
                 state_ = STATE_PARSE_HEADERS;
         }
 
-        if(state_ == STATE_PARSE_HEADERS)
+        if(state_ == STATE_PARSE_HEADERS)    //解析头部字段
         {
             HeaderState flag = this->parseHeaders();
             if(flag == PARSE_HEADER_AGAIN)
@@ -235,7 +236,7 @@ void HttpData::handleRead()
             }
         }
 
-        if(state_ == STATE_RECV_BODY)
+        if(state_ == STATE_RECV_BODY)  //POS
         {
             int content_length = -1;
             if(headers_.find("Content-length") != headers_.end())
@@ -343,6 +344,7 @@ void HttpData::handleConn()
         }
         else
         {
+            //测试就取消屏蔽
             //cout << "close normally" << endl;
             // loop_->shutdown(channel_);
             // loop_->runInLoop(bind(&HttpData::handleClose, shared_from_this()));
@@ -380,8 +382,8 @@ URIState HttpData::parseURI()
         str = str.substr(pos + 1);
     else 
         str.clear();
-    // Method
-    int posGet = request_line.find("GET");
+    // 解析请求方法Method
+    int posGet = request_line.find("GET");  //找不到返回-1
     int posPost = request_line.find("POST");
     int posHead = request_line.find("HEAD");
 
@@ -460,7 +462,7 @@ URIState HttpData::parseURI()
 
 HeaderState HttpData::parseHeaders()
 {
-    string &str = inBuffer_;
+    string &str = inBuffer_;    //解析除了请求行后剩余的inBuffer_
     int key_start = -1, key_end = -1, value_start = -1, value_end = -1;
     int now_read_line_begin = 0;
     bool notFinish = true;
@@ -540,7 +542,7 @@ HeaderState HttpData::parseHeaders()
                 {
                     hState_ = H_END_CR;
                 }
-                else
+                else    //否则还有其他头部字段
                 {
                     key_start = i;
                     hState_ = H_KEY;
@@ -579,27 +581,7 @@ AnalysisState HttpData::analysisRequest()
 {
     if (method_ == METHOD_POST)
     {
-        // ------------------------------------------------------
-        // My CV stitching handler which requires OpenCV library
-        // ------------------------------------------------------
-        // string header;
-        // header += string("HTTP/1.1 200 OK\r\n");
-        // if(headers_.find("Connection") != headers_.end() && headers_["Connection"] == "Keep-Alive")
-        // {
-        //     keepAlive_ = true;
-        //     header += string("Connection: Keep-Alive\r\n") + "Keep-Alive: timeout=" + to_string(DEFAULT_KEEP_ALIVE_TIME) + "\r\n";
-        // }
-        // int length = stoi(headers_["Content-length"]);
-        // vector<char> data(inBuffer_.begin(), inBuffer_.begin() + length);
-        // Mat src = imdecode(data, CV_LOAD_IMAGE_ANYDEPTH|CV_LOAD_IMAGE_ANYCOLOR);
-        // //imwrite("receive.bmp", src);
-        // Mat res = stitch(src);
-        // vector<uchar> data_encode;
-        // imencode(".png", res, data_encode);
-        // header += string("Content-length: ") + to_string(data_encode.size()) + "\r\n\r\n";
-        // outBuffer_ += header + string(data_encode.begin(), data_encode.end());
-        // inBuffer_ = inBuffer_.substr(length);
-        // return ANALYSIS_SUCCESS;
+        //FIXED ME
     }
     else if (method_ == METHOD_GET || method_ == METHOD_HEAD)
     {
@@ -621,18 +603,23 @@ AnalysisState HttpData::analysisRequest()
         // echo test
         if (filename_ == "hello")
         {
-            outBuffer_ = "HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
+            if(method_ == METHOD_HEAD)
+                outBuffer_ = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 9\r\n\r\n";
+            else
+                outBuffer_ = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 9\r\n\r\nhello xcw";
+            cout << outBuffer_ << endl;
             return ANALYSIS_SUCCESS;
         }
         if (filename_ == "favicon.ico")
         {
             header += "Content-Type: image/png\r\n";
             header += "Content-Length: " + to_string(sizeof favicon) + "\r\n";
-            header += "Server: LinYa's Web Server\r\n";
+            header += "Server: XCW's Web Server\r\n";
 
             header += "\r\n";
             outBuffer_ += header;
-            outBuffer_ += string(favicon, favicon + sizeof favicon);;
+            if(method_ == METHOD_GET)
+                outBuffer_ += string(favicon, favicon + sizeof favicon);;
             return ANALYSIS_SUCCESS;
         }
 
@@ -645,7 +632,7 @@ AnalysisState HttpData::analysisRequest()
         }
         header += "Content-Type: " + filetype + "\r\n";
         header += "Content-Length: " + to_string(sbuf.st_size) + "\r\n";
-        header += "Server: LinYa's Web Server\r\n";
+        header += "Server: XCW's Web Server\r\n";
         // 头部结束
         header += "\r\n";
         outBuffer_ += header;
@@ -685,13 +672,13 @@ void HttpData::handleError(int fd, int err_num, string short_msg)
     body_buff += "<html><title>哎~出错了</title>";
     body_buff += "<body bgcolor=\"ffffff\">";
     body_buff += to_string(err_num) + short_msg;
-    body_buff += "<hr><em> LinYa's Web Server</em>\n</body></html>";
+    body_buff += "<hr><em> XCW's Web Server</em>\n</body></html>";
 
     header_buff += "HTTP/1.1 " + to_string(err_num) + short_msg + "\r\n";
     header_buff += "Content-Type: text/html\r\n";
     header_buff += "Connection: Close\r\n";
     header_buff += "Content-Length: " + to_string(body_buff.size()) + "\r\n";
-    header_buff += "Server: LinYa's Web Server\r\n";;
+    header_buff += "Server: XCW's Web Server\r\n";;
     header_buff += "\r\n";
     // 错误处理不考虑writen不完的情况
     sprintf(send_buff, "%s", header_buff.c_str());
