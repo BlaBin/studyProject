@@ -38,7 +38,7 @@
 * 支持优雅关闭连接 
 
 ## 模型选择
-并发模型为Reactors+非阻塞IO，新连接采用Round Robin(轮叫)的方式分配，详细介绍请参考并发模型
+并发模型为Reactors+非阻塞IO，新连接采用Round Robin(轮叫)的方式分配，详细介绍请参考[并发模型](https://github.com/xcw-coder/WebServer/blob/master/%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B.md)
 ![并发模型](https://github.com/xcw-coder/WebServer/blob/master/pictures/model.png)
 
 ## 代码统计
