@@ -1,6 +1,6 @@
 # High-performance web server written in C++
 [![Build Status](https://travis-ci.org/xcw-coder/WebServer.svg?branch=master)](https://travis-ci.org/xcw-coder/WebServer)
-![](https://img.shields.io/cran/l/devtools.svg)
+![](https://img.shields.io/github/license/xcw-coder/WebServer.svg)
 
 本项目已经在 https://travis-ci.org 网站上通过了编译，详情可点击左上角绿色的passing图标进行查看。
 
