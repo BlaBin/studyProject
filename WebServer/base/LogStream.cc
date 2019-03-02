@@ -1,5 +1,3 @@
-//Author: xcw
-//Email: xcw_coder@qq.com
 //2018年12月01日22:34:52
 #include "LogStream.h"
 #include <assert.h>

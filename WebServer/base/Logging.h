@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月04日22:58:41
 #pragma once
 #include "LogStream.h"

@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月13日22:58:29
 #pragma once
 #include "Channel.h"

@@ -1,5 +1,3 @@
-//Author xcw
-//Author xcw_coder@qq.com
 //2018年12月13日21:58:36
 #pragma once
 #include "Timer.h"

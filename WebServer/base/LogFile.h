@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月01日21:08:33
 //进一步封装FileUtil类
 #pragma once

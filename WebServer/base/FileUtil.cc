@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com 
 //2018年11月29日00:21:15
 #include "FileUtil.h"
 #include <assert.h>

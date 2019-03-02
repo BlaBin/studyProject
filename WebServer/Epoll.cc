@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月13日23:26:09
 #include "Epoll.h"
 #include "Util.h"

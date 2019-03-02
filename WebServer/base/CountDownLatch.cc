@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年11月25日23:21:54
 #include "CountDownLatch.h"
 

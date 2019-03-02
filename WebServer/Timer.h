@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月13日20:38:08
 #pragma once
 #include "HttpData.h"

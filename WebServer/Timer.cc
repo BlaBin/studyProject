@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月13日21:15:53
 #include "Timer.h"
 #include <sys/time.h>

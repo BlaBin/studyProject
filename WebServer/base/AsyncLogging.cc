@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月04日10:06:34
 #include "AsyncLogging.h"
 #include "LogFile.h"

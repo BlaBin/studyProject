@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月04日23:26:20
 #include "Logging.h"
 #include "CurrentThread.h"

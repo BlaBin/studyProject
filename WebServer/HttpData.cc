@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月09日17:28:45
 #include "HttpData.h"
 #include "Util.h"

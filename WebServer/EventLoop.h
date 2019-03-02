@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月19日00:32:12
 #pragma once
 #include "base/Thread.h"

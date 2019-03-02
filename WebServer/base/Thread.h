@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年11月27日19:35:42
 //封装线程类
 #pragma once

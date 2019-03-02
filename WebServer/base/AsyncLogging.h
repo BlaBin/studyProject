@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月04日09:35:55
 #pragma once
 #include "CountDownLatch.h"

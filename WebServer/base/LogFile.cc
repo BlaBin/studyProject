@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月01日21:31:43
 #include "LogFile.h"
 #include "FileUtil.h"

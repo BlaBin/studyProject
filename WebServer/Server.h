@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月22日19:24:09
 #pragma once
 #include "EventLoop.h"

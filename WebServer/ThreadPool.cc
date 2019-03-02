@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月18日14:55:00
 #include "ThreadPool.h"
 

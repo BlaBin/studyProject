@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月22日16:42:17
 #pragma once
 #include "base/noncopyable.h"

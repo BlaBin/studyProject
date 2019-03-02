@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月19日16:08:49
 #include "EventLoopThread.h"
 #include <assert.h>

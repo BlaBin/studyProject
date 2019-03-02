@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年11月25日23:48:26
 #pragma once
 #include <stdint.h>

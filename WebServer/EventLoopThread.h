@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月19日15:48:14
 #pragma once
 #include "base/Condition.h"

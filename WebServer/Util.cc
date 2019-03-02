@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月09日15:18:03
 #include "Util.h"
 #include <unistd.h>

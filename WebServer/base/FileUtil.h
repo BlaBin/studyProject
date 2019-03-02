@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com 
 //2018年11月28日23:58:46
 //封装了最底层的文件类，RAII技法
 #pragma once

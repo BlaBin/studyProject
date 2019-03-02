@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年12月27日21:20:34
 #include "EventLoop.h"
 #include "Server.h"

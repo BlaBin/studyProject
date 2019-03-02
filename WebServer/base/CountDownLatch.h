@@ -1,5 +1,3 @@
-//Author: xcw
-//Email:  xcw_coder@qq.com
 //2018年11月25日23:12:05
 //CountDownLatch的主要作用是确保Thread中传进去的线程函数
 //func真的启动以后，外层的start才返回
